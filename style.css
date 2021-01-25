@@ -1,0 +1,329 @@
+/* Commun */
+
+@font-face {
+    
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    text-align: center;
+    background-color: #ffffff;
+    font-size: 20px;
+    padding-bottom: 50px;
+}
+
+.entreprise {
+    font-family: "Time New Roman";
+}
+
+a 
+{
+	text-decoration: none;
+	color: #b100000;
+}
+
+nav {
+    padding: 20px;
+    background-color: #efdeef;
+}
+
+ul {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+li {
+    margin: 0 20px;
+    list-style-type: none;
+    font-size: 25px;
+}
+
+header {
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 60px 0;
+	color: red;
+}
+
+header,
+section {
+    max-width: 1024px;
+    margin: auto;
+	
+}
+
+h1 {
+    font-size: 45px;
+	
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 25px;
+    margin: 10px;
+	text-align: center;
+}
+
+p,
+h3,
+
+footer
+{
+	background-color: #ffffff;
+}
+.prix,
+select {
+    margin: 10px auto 10px;
+}
+
+p {
+    width: 90%;
+    overflow-wrap: anywhere;
+}
+
+
+/* Page index */
+
+.entete {
+    font-size: 30px;
+}
+
+#produits {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.categorie {
+    margin: 20px 3vw;
+   
+}
+
+.titre-cate {
+    font-size: 25px;
+    margin: 20px;
+    display: block;
+}
+
+.img-produit {
+    width: 95%;
+    border: 1px solid #9C7693;
+    max-width: 500px;
+}
+
+
+/* Page produit */
+
+.objet {
+    margin: 5px 2%;
+    border: 2px solid black;
+    padding: 10px 5px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.detail-article {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+#couleurs {
+    display: inline-block;
+    padding: 5px;
+    margin: auto;
+    width: 200px;
+}
+
+#bouton,
+.bouton {
+    width: 184px;
+    background-color: #f31c9e;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.prix {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 10px;
+}
+
+
+/* Page panier */
+
+.total {
+    font-weight: 700;
+    font-size: 22px;
+    margin: 20px;
+}
+
+.contact {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+label,
+button {
+    margin-top: 10px;
+}
+
+.vide {
+    text-align: center;
+    font-size: 25px;
+}
+
+.panier {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.details-panier {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    margin: 10px;
+    width: 55%;
+}
+
+.img-panier {
+    width: 45%;
+    height: 45%;
+    border: 1px solid #9C7693;
+    margin: 10px 0;
+    max-width: 245px;
+}
+
+#commande-coordonnées,
+.contact {
+    background-color: #C6E5FA;
+    margin: 10px;
+    padding: 10px;
+}
+
+#contenu {
+    margin-bottom: 20px;
+}
+
+.img-supprimer {
+    width: 20px;
+    margin-right: 5px;
+}
+
+#deja-panier {
+    margin-top: 10px;
+    color: red;
+}
+
+.main-formulaire {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+.row-formulaire,
+.row-formulaire-email {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+#valider-panier {
+    padding: 5px;
+}
+
+.invalide {
+    border-color: red;
+}
+
+.redBtn {
+    background-color: #b10b0b;
+    color: white;
+}
+
+.redBtn:hover {
+    background-color: red;
+}
+
+
+/* Pour la confirmation de commande */
+
+.titre-contact {
+    font-weight: 700;
+}
+
+
+/* debut media query */
+
+@media screen and (min-width: 700px) {
+	
+    /* Pour le panier */
+	
+    .main-formulaire {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        justify-content: center;
+    }
+    .row-formulaire {
+        width: 45%;
+        padding: 0 10px;
+    }
+    .row-formulaire-email {
+        width: 90%;
+    }
+    #valider-panier {
+        width: 250px;
+    }
+    .contact {
+        -webkit-box-align: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .objet {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+    }
+}
