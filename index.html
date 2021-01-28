@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html>
-	<head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="shortcut icon" href="favicon.ico" />
-        <script type="text/javascript" src="index.js" defer></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orinoco - La boutique thématique</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-		<title>Ours en peluche by Orinoco</title>
-	</head>
-	<body>
+<body>
+
+	<header>
 		<nav>
-			<ul>
-				<li class="entreprise"><a href="index.html"><img src="images/logo_small.png"></a></li>
-				<li><a href="panier.html">Voir le Panier</a></li>
-			</ul>
-		</nav>
-		<header class="accueil">
-		Promo jusqu'au 28 février: Frais de port gratuit
-		</header>
-		<section>
-			<article>
-				<div class="entete">Découvrez nos articles</div>
-				<div id="produits"></div>
-			</article>
-		</section>
-		
-		<footer>
-		&copy; 2021 Orinoco - Tous droits réservés<br />
-		<img src="images/icon/paiement.png"><br />
-		<img src="images/icon/visa_secure.png">
-		<img src="images/icon/mc_secure.png">
-		</footer>
-	</body>
+			<a href="index.html">
+			<img src="images/logo_small.png" alt="Orinoco" title="Orinoco">
+			</a>
+			<div class="dropdown">
+				<div id="cart">
+					<p><i class="fa fa-shopping-basket  fa-1x"></i>  Articles :  (<span id="in-cart-items-num">0</span>)</p>
+				</div>
+			
+				<ul id="cart-dropdown" hidden>
+					<li id="empty-cart-msg"><a>Panier vide</a></li>
+					<li class="go-to-cart hidden"><a href="panier.html">Voir le panier</a></li>
+				</ul>
+			</div>
+			</nav>
+	</header>
+	
+	<section>
+	<center><h2>Edition limitée : 100% fait main</h2></center>
+    <div class="container"></div>
+	<script src="index.js"></script>
+	<script src="panier.js"></script>
+	</section>
+	
+	<footer>
+	(c) 2021 Orinoco - Tous droits réservés
+	</footer>
+	<script src="https://kit.fontawesome.com/ffb09557c8.js" crossorigin="anonymous" ></script>
+</body>
 </html>
