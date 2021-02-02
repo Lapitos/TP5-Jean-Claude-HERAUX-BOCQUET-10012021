@@ -5,7 +5,6 @@ async function getTeddies() {
     let url = 'http://localhost:3000/api/teddies';
     try {
         let res = await fetch(url);
-		const url1 = url;
         return await res.json();
     } catch (error) {
         console.log(error);

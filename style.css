@@ -70,7 +70,7 @@ li
 .container img {
     border-radius: 50%;
     padding: 1rem;
-    background-color: #f4f4f4;
+    background-color: #e7b072;
 }
 
 footer
@@ -112,14 +112,173 @@ button
             box-shadow: 1px 1px 12px #555;
 }
 
+th {
+    background-color: #fff;
+    padding: 2rem;
+    border: solid 1px #ccd0d4;
+    border-radius: 0.3rem;
+    text-align: center;
+    margin: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+}
 
+/* Mise en forme du tableau récapitulatif */
 
+table{
+    margin-left: 27%;
+}
 
+.tableau
+{
+    width: 100%;
+    margin: 1em;
+}
+
+.main-formulaire {
+    display: flex;
+    flex-direction: column;
+	width: 100%;
+}
+
+.row-formulaire {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 27%;
+}
+
+.row-button {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-left: 27%;
+	margin-top: 50px;
+}
+
+.contact {
+    background-color: #C6E5FA;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Mise en forme pour la saisie des coordonnées */
+
+.coordonnes
+{
+    background-color: #fff;
+    padding: 2rem;
+    border: solid 1px #ccd0d4;
+    border-radius: 0.3rem;
+    margin: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+}
+
+fieldset{
+  background-color: RGBa(240, 160, 0, 0.2);
+}
+legend{
+  font-weight: bold;
+}
+.champ{
+  margin-bottom: 10px;
+}
+textarea{
+  width: 100%;
+  height: 200px;
+}
+input{
+  height: 30px;
+  border-top: white;
+}
+
+input[type="submit"]{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 50%
+}
+
+/* Mise en forme style bouton input*/
+
+.styled {
+    border: 0;
+    line-height: 2.5;
+	margin-top: 10px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+/* Mise en forme input formulaire*/
+
+input.controle {
+  outline:0;
+  font-size:14px;
+  width:100%;
+}	
+label.label {
+  display:inline-block;
+  width:100%;
+  text-align: left;
+  font-style: italic;
+  margin-left:15px;
+}
+input.controle:valid {
+  border:3px solid #0a0;
+}
+input.controle:invalid {
+  border:3px solid #a00;
+}
+input.controle:valid + span:before  {
+  content: "🗸";
+  color:#0a0;
+  font-size: 1.5em;
+}	
+input.controle:invalid + span:before  {
+  content: "\f00d";
+  font-family: "FontAwesome";
+  color:#a00;
+  font-size: 1.5em;
+}
 
 @media(max-width:560px) {
     .container {
         display: flex;
         flex-direction: column;
-
     }
+	
+	.row-formulaire {
+    width: 90%;
+    margin-left: 2%;
+	}
+	
+    table 
+    { margin-left: 0;
+	
+    }
+    .tableau{
+        margin: 0;
+    }
+	
+	input {
+		width: 300px;
+		margin-left: 10px;
+	}
 }

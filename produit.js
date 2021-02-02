@@ -15,7 +15,6 @@ async function getTeddies() {
     let url = ('http://localhost:3000/api/teddies/') + valueTeddy;
     try {
         let res = await fetch(url);
-		const url1 = url;
         return await res.json();
     } catch (error) {
         console.log(error);
@@ -24,12 +23,9 @@ async function getTeddies() {
 
 // affichage dans la page HTML
 
-
-
 async function renderTeddies() {
     let teddy = await getTeddies();
     let html = '';
-	let undefined = "";
     let container = document.querySelector (".container");
 	container.innerHTML = `<div class="teddy">
                             <img src="${teddy.imageUrl}" >
@@ -50,6 +46,7 @@ async function renderTeddies() {
                             </select>
                             <br />
                             <button>Mettre au panier</button>
+                            <a href="panier.html"><button>Récapitulatif</button></a>
                             </div>`;
 							
 //On sélectionne le button du document
@@ -71,11 +68,11 @@ b1.onclick = function(){
     // mise en place des différentes variables
     var produitCommande = teddy.name;
     var produitReference = teddy._id;
+    var produitImage = teddy.imageUrl;
     var produitQuantity = qt.value;
     var produitPrix = teddy.price/100;
     var prixTotal = (produitPrix * qt.value);
 
-    console.log("Numéro de commande : " + numeroCommande);
     console.log("Produit commandé :" + produitCommande);
     console.log("Référence: " + produitReference);
     console.log("Quantité : " + qt.value);
@@ -84,8 +81,9 @@ b1.onclick = function(){
 
     // On sauvegarde les différentes lignes dans le localStorage
     localStorage.setItem("Numéro de commande", numeroCommande);
-    localStorage.setItem("Produit commandé", produitCommande);
+    localStorage.setItem("Article", produitCommande);
     localStorage.setItem("Référence", produitReference);
+    localStorage.setItem("Image",produitImage);
     localStorage.setItem("Quantité", qt.value);
     localStorage.setItem("Prix unitaire", produitPrix);
     localStorage.setItem("Total à payer", prixTotal);
@@ -94,10 +92,14 @@ b1.onclick = function(){
     console.log("Commande enregistrée N° = " + localStorage.getItem("Numéro de commande"));
 
 	// On avertit le client que son article est dans le panier
-	alert('Article ajouté au panier - Commande N°' + numeroCommande);
-	
-};
+    alert('Article ajouté au panier - Commande N°' + numeroCommande);
 
+    // Nombre d'article dans le localStorage
+
+    var articlePanier = localStorage.length/7;
+    console.log("Nombre d'article : " + articlePanier);     
+    
+ };
 
 }
 
