@@ -91,30 +91,32 @@ localStorage.setItem("Ville", ville);
 localStorage.setItem("Email", email);
 
  // On vérifie que cela s'est correctement déroulé
-console.log("Commande pour " + localStorage.getItem("Nom") + "OK");
+console.log("Commande pour " + localStorage.getItem("Nom") + " --> OK");
 
 // On envoie vers l'API
 
-var contact = [{nom:localStorage.getItem("Nom"), prenom:localStorage.getItem("Prénom"), adresse:localStorage.getItem("Adresse"), ville:localStorage.getItem("Ville"), email:localStorage.getItem("Email")}];
-var order = [{Commande:localStorage.getItem("Référence")}];
+
+
+var contact = {nom:localStorage.getItem("Nom"), prenom:localStorage.getItem("Prénom"), adresse:localStorage.getItem("Adresse"), ville:localStorage.getItem("Ville"), email:localStorage.getItem("Email")};
+var products = ["5beaabe91c9d440000a57d96"];//{Commande:localStorage.getItem("Référence")};
 // Vérification des infos du tableau
 console.log(contact); 
-console.log(order); 
+console.log(products); 
 
 // On l'envoie avec fetch sur contact
 
-var orderDatas = JSON.stringify({contact, order});
-console.log("Info:" + orderDatas);
+var orderDatas = JSON.stringify({contact, products});
+console.log("Contrôle avant envoi:" + orderDatas);
 
 commande = async function (orderDatas) {
-        let commande = await fetch("http://localhost:3000/api/teddies/order/", {
+        let commande = await fetch("http://localhost:3000/api/teddies/order", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charser=UTF-8'
             },
-            body: commande
+            body: orderDatas
         })
-
+console.log(commande.status);
         if (commande.ok) {
             return commande.json();
         } else {
@@ -122,10 +124,13 @@ commande = async function (orderDatas) {
         }
     }
 
+commande();
 
+/*
 
 alert("Vos coordonnées ont bien été enregistrées.");
 window.open("confirmation.html"); 
+*/
 
 }
 
