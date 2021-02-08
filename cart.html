@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Panier</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/e439166e98.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="cart.js" async></script>
+  </head>
+  <body>
+  
+    <header>
+      <div class="logo">
+        <img src="images/chariot.png" alt="Bienvenue à Orinoco" title="Bienvenue à Orinoco/>
+        <a href="index.html"><h1>Orinoco</h1></a>
+      </div>
+      <a href="cart.html"><i class="fas fa-shopping-basket"></i>Panier</a>
+    </header>
+
+    <main>
+      <a href="./index.html">Retour à l'accueil</a>
+      <h2>Détail de votre panier</h2>
+      <section id="cart">
+        <h3 id="cart-total"></h3>
+      </section>
+      <div class="container">
+	  <fieldset>Où doit-on envoyer votre commande</fieldset>
+        <form>
+		 <label for="firstName"><i class="fas fa-user"></i>&nbsp; Prénom <span class="text-danger">*</span></label>
+          <input type="text" id="firstName" name="firstName" placeholder="exemple : DUPONT" required pattern="[a-zA-Z-\.]{3,30}" />
+          <p id="firstNameErrorMessage" class="form-error"></p>
+
+          <label for="lastName"><i class="fas fa-user"></i>&nbsp; Nom <span class="text-danger">*</span></label>
+          <input type="text" id="lastName" name="lastName" placeholder="exemple : Jean" required pattern="[a-zA-Z-\.]{3,30}" />
+          <p id="lastNameErrorMessage" class="form-error"></p>
+
+          <label for="address"><i class="fas fa-hotel"></i>&nbsp; Adresse <span class="text-danger">*</span></label>
+          <input type="text" id="address" name="address" placeholder="exemple : 10 rue de la Haute Montée" required />
+          <p id="addressErrorMessage" class="form-error"></p>
+
+          <label for="city"><i class="fas fa-home"></i>&nbsp; Ville <span class="text-danger">*</span></label>
+          <input type="text" id="city" name="city" placeholder="exemple : STRASBOURG" required  pattern="[a-zA-Z-\/.]{3,50}" />
+          <p id="cityErrorMessage" class="form-error"></p>
+
+          <label for="email"><i class="fas fa-at"></i>&nbsp; Email <span class="text-danger">*</span></label>
+          <input type="email" id="email" name="email" placeholder="exemple : mail@serveur.com" required />
+          <p id="emailErrorMessage" class="form-error"></p>
+		  * tous les champs sont obligatoires<br />
+
+          <input type="submit" id="btn" value="Valider" />
+        </form>
+      </div>
+    </main>
+	
+	<footer>
+	(c) 2021 Orinoco - TP5 - HERAUX-BOCQUET Jean-Claude
+	</footer>
+	
+  </body>
+</html>

@@ -1,38 +1,30 @@
+// URL de l'api
+const url = "http://localhost:3000/api/teddies";
 
-// Connexion et obtention des objets
+// Affiche tous les produits
+const displayProducts = async () => {
+  const products = await getAllTeddies(url);
+  products.forEach((product) => {
+    renderProduct(product.name, product._id, product.imageUrl, product.price);
+  });
+};
+// Récupère toutes les peluches
+const getAllTeddies = async (url) => {
+  const response = await fetch(url);
+  return await response.json();
+};
 
-async function getTeddies() {
-    let url = 'http://localhost:3000/api/teddies';
-    try {
-        let res = await fetch(url);
-        return await res.json();
-    } catch (error) {
-        console.log(error);
-    }
+// Affichage des produits
+function renderProduct(productName, productId, productImg, productPrice) {
+// div qui contiendra les différents articles
+  const products = document.querySelector("#products"); 
+  const article = document.createElement("article");
+  article.innerHTML = `<img alt="${productName}" src="${productImg}">
+    <button class="product-link" type="button"><a href="product.html?id=${productId}">Voir ce produit</a></button>
+    <p class="product-title">Modèle : ${productName}</p>
+    <p class="price">Prix : ${productPrice / 100}</p>
+    `;
+  products.appendChild(article);
 }
 
-// affichage dans la page HTML
-
-async function renderTeddies() {
-    let Teddies = await getTeddies();
-    let html = '';
-	
-    Teddies.forEach(teddy => {
-        let htmlSegment = `<div class="teddy">
-                            <img src="${teddy.imageUrl}" >
-                            <h1>${teddy.name}</h1>
-							<h1>Au prix exceptionnel de ${teddy.price/100}€</h1>
-                            <a href="produit.html?id=${teddy._id}">Commander maintenant votre exemplaire</a>
-							
-                        </div>`;
-
-        html += htmlSegment;
-    });
-	
-	
-// le container pour afficher les éléments HTML dans la page
-    let container = document.querySelector('.container');
-    container.innerHTML = html;
-}
-
-renderTeddies();
+displayProducts();
