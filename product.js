@@ -6,10 +6,10 @@ const id = params.get("id");
 
 const article = document.querySelector("article");
 
-// Affiche le produit
+// Mise en place de l'affiche le produit
 const displayProduct = async () => {
   const data = await getTeddy(url, id);
-  renderCams(data);
+  renderTeddy(data);
   customizeTeddy(article, data.colors);
   addToCart(article, data);
 };
@@ -19,7 +19,7 @@ const getTeddy = async (productUrl, productId) => {
   return await response.json();
 };
 // Constitution des éléments pour l'insertion via innerHTML
-const renderCams = (productData) => {
+const renderTeddy = (productData) => {
   article.innerHTML = `
     <div class="product">
         <img src="${productData.imageUrl}" alt="${productData.name}">
@@ -52,7 +52,7 @@ const customizeTeddy = (parentElt, productColors) => {
     option.textContent = productColors.toUpperCase();
     select.appendChild(option);
   });
-  // Récupère la couleur choisie dans la console
+  // Récupère la couleur choisie
   select.addEventListener("change", (e) => {
     colorChosen = e.target.value.toLowerCase();
   });

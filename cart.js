@@ -11,7 +11,7 @@ const cartInformation = {
   products: [],
 };
 
-// Prix total initial
+// Prix total initial remis à 0
 let totalPrice = 0;
 
 // On récupère les produits du panier.
@@ -96,7 +96,7 @@ const deleteCart = (removeElt, container, productId) => {
   });
 };
 
-// décrémente et enlève un produit au panier avec l'icone -
+// décrémentation et enlève un produit au panier avec l'icone -
 
 const decrementItem = (iconLeft, container, productId) => {
   iconLeft.addEventListener("click", () => {
@@ -116,7 +116,7 @@ const decrementItem = (iconLeft, container, productId) => {
   });
 };
 
-// incremente avec l'icone +
+// incrémentation avec l'icone +
 
 const incrementItem = (iconRight, container, productId) => {
   iconRight.addEventListener("click", () => {
@@ -239,6 +239,7 @@ const postData = async (method, url, dataElt) => {
     body: JSON.stringify(dataElt),
   });
   return await response.json();
+  console.log("Données" + posData + "envoyées à l'API")
 };
 
 // On écoute le clic
