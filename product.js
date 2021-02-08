@@ -1,6 +1,6 @@
-// URL de l'api
+// Constant de l'URL de l'api
 const url = "http://localhost:3000/api/teddies/";
-// Recupere les paramètres de l'url
+// Recupere l'ID du produit
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
@@ -8,17 +8,17 @@ const article = document.querySelector("article");
 
 // Affiche le produit
 const displayProduct = async () => {
-  const data = await getOneCams(url, id);
+  const data = await getTeddy(url, id);
   renderCams(data);
   customizeTeddy(article, data.colors);
   addToCart(article, data);
 };
-// Récupère une caméra
-const getOneCams = async (productUrl, productId) => {
+// Récupère une peluche
+const getTeddy = async (productUrl, productId) => {
   const response = await fetch(productUrl + productId);
   return await response.json();
 };
-// Fourni l'affichage selon les données du produit
+// Constitution des éléments pour l'insertion via innerHTML
 const renderCams = (productData) => {
   article.innerHTML = `
     <div class="product">
@@ -28,14 +28,15 @@ const renderCams = (productData) => {
             <p class="price">${productData.price / 100}</p>
 			<p class="description">${productData.description}</p>
             <p class="description">Fait main près de chez vous !</p>
-			<p class="description">Personnalisez votre peluche</p>
+			<p class="description">Choisissez votre couleur.</p>
+			<p class="description">La quantité peut-être modifiée au panier.</p>
         </div>
     </div>`;
 };
 
-// Personnalise le produit
-const customizeTeddy = (parentElt, productColorss) => {
-  // Crée liste déroulante
+// Personnalisation du produit avec les options
+const customizeTeddy = (parentElt, productColors) => {
+  // Création de la liste déroulante
   const label = document.createElement("label");
   const select = document.createElement("select");
 
@@ -44,8 +45,8 @@ const customizeTeddy = (parentElt, productColorss) => {
   select.id = "colors-list";
 
   parentElt.appendChild(label).appendChild(select);
-  // Crée une balise option pour chaque couleur
-  productColorss.forEach((productColors) => {
+  // Création d'une balise option pour chaque couleur
+  productColors.forEach((productColors) => {
     const option = document.createElement("option");
     option.value = productColors;
     option.textContent = productColors.toUpperCase();
@@ -56,16 +57,16 @@ const customizeTeddy = (parentElt, productColorss) => {
     colorChosen = e.target.value.toLowerCase();
   });
 };
-	// Ajoute le produit au panier
+	// On ajoute le produit au panier
 	const addToCart = (parentElt, productData) => {
-  // Crée le bouton d'envoie du produit
+  // Création d'un bouton d'envoi
   const btn = document.createElement("button");
   const div = document.createElement("div");
   btn.textContent = "Ajouter au panier";
   div.classList.add("add-to-cart");
   parentElt.appendChild(div).appendChild(btn);
 
-  // Assigne valeur à envoyer à localStorage
+  // Constante Produit pour envoi dans le localStorage
   const product = {
     id: productData._id,
     name: productData.name,
@@ -74,20 +75,20 @@ const customizeTeddy = (parentElt, productColorss) => {
     quantity: 1,
   };
 
-  // Envoie valeur à localStorage après un clique
+  // On écoute le clic pour envoyer le tout au LocalStorage
   btn.addEventListener("click", () => {
-    // récupérer panier localstorage
+    // On récupére le panier localstorage
     let panier = JSON.parse(localStorage.getItem("panier"));
     if (panier === null) {
       panier = {};
     }
-    // ajouter le produit au panier
+    // On ajoute le produit au panier
     if (panier[product.id] !== undefined) {
       panier[product.id].quantity += 1;
     } else {
       panier[product.id] = product;
     }
-    // update panier localstorage
+    // On met à jour le panier localstorage
     localStorage.setItem("panier", JSON.stringify(panier));
     btn.classList.add("invisible");
     div.textContent = "Le produit a été ajouté au panier !";

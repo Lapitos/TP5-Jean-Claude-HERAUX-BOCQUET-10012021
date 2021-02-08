@@ -1,61 +1,69 @@
-const cart = document.querySelector("#cart"); // Récupère la section du panier
-const cartTotal = document.getElementById("cart-total"); //Récupère le h3 pour le prix total
-const form = document.querySelector("form"); // Récupère le formulaire
+// Constante pour récupérer le panier
+const cart = document.querySelector("#cart"); 
+// Constante pour le prixtotal du panier
+const cartTotal = document.getElementById("cart-total");
+// Constante pour les éléments du formulaire
+const form = document.querySelector("form");
 
+// Mise en forme pour l'envoi à l'API sous la forme qu'il désire
 const cartInformation = {
   contact: {},
   products: [],
 };
-/* Stock le prix total */
+
+// Prix total initial
 let totalPrice = 0;
 
-// Affiche les produits du panier.
+// On récupère les produits du panier.
 const displayCart = async () => {
   const cartItems = JSON.parse(localStorage.getItem("panier"));
   if (Object.keys(cartItems).length > 0) {
+	  // Pour chaque article du panier
     for (let i = 0; i < Object.keys(cartItems).length; i++) {
-      // Pour chaque article du panier
       const itemId = Object.keys(cartItems)[i];
-	  // Récupère les informations du produit
+	  // On récupère les informations du produit
       const product = await getItem(itemId); 
 	  // Stockage de l'id du produit
       const tedId = product._id; 
 	  // Stockage du nom du produit
       const tedName = product.name; 
-	  // Stockage du prix du produit
+	  // Stockage du prix du produit en euros
       const tedPrice = product.price / 100; 
 	  // Stockage de l'image du produit
       const tedImg = product.imageUrl; 
       const tedQuantity = cartItems[itemId].quantity;
-	  // Envoie de l'id au tableau products de cartInformation
+	  // Envoi de l'id au tableau products de cartInformation
       cartInformation.products.push(tedId); 
 	  // Rendu des produits du panier
       renderCart(tedName, tedPrice, tedImg, tedQuantity); 
-
+	  // Constante pour l'enlèvement d'un produit et le changement de quantité
       const remove = document.querySelectorAll(".remove")[i];
       const article = document.querySelectorAll("article")[i];
       const iconLeft = document.querySelectorAll(".fa-minus")[i];
       const iconRight = document.querySelectorAll(".fa-plus")[i];
 
       deleteCart(remove, article, itemId);
-      decrementItem(iconLeft, article, itemId); // appel de la fonction décrémentation avec la flèche de gauche
-      incrementItem(iconRight, article, itemId); // appel de la fonction incrémentation avec la flèche de droite
+	  // appel de la fonction décrémentation symbole -
+      decrementItem(iconLeft, article, itemId); 
+	  // appel de la fonction incrémentation symbole +
+      incrementItem(iconRight, article, itemId); 
     }
   } else {
     cart.textContent = "Votre panier est vide.";
     form.classList.add("invisible");
   }
 };
-// Récupère élément dans localStorage
+// On récupère les infos avec l'ID produit
 const getItem = async (productId) => {
   const response = await fetch(
     "http://localhost:3000/api/teddies/" + productId
   );
   return await response.json();
 };
-// Fourni l'affichage du/des produits du panier
+
+// Constante pour affichage du/des produits du panier
 const renderCart = (productName, productPrice, imgUrl, productQuantity) => {
-  /* Affiche article(s) du panier */
+// Création des éléments pour affichage des articles
   const article = document.createElement("article");
   article.innerHTML = `
     <img src="${imgUrl}">
@@ -65,11 +73,14 @@ const renderCart = (productName, productPrice, imgUrl, productQuantity) => {
     </div>
     <p class="quantity"><i class="fas fa-minus">&nbsp;&nbsp;${productQuantity}&nbsp;&nbsp;</i><i class="fas fa-plus"></i></p>
     <p class="remove "><i class="fas fa-times"></i> &nbsp;&nbsp;&nbsp;&nbsp;</p>`;
-  cart.insertBefore(article, cartTotal); // Insère article avant cartTotal
-  totalPrice += productPrice * productQuantity; /* Implémente prix */
-  cartTotal.textContent = `Net à payer : ${totalPrice}€`; /* Affiche le prix total */
+// On insère article avant cartTotal	
+  cart.insertBefore(article, cartTotal); 
+// On insère le prix
+  totalPrice += productPrice * productQuantity; 
+// On insère le prix total
+  cartTotal.textContent = `Net à payer : ${totalPrice}€`; 
 };
-/* Supprime élément du panier sur un clique*/
+// Si clic sur suppression, on enlève le produit
 const deleteCart = (removeElt, container, productId) => {
   removeElt.addEventListener("click", async () => {
     const panier = JSON.parse(localStorage.getItem("panier"));
@@ -79,13 +90,13 @@ const deleteCart = (removeElt, container, productId) => {
       delete panier[productId];
     }
     localStorage.setItem("panier", JSON.stringify(panier));
-    // ); /* Supprime item du localStorage */
-    container.remove(); /* Supprime item du DOM */
-    location.reload(true); /* Actualise la page dynamiquement */
+    container.remove(); 
+// on réactualise la page avec reload
+    location.reload(true); 
   });
 };
 
-// décrémente et enlève un produit au panier avec la flèche de gauche
+// décrémente et enlève un produit au panier avec l'icone -
 
 const decrementItem = (iconLeft, container, productId) => {
   iconLeft.addEventListener("click", () => {
@@ -98,13 +109,14 @@ const decrementItem = (iconLeft, container, productId) => {
       delete panier[productId];
     }
     localStorage.setItem("panier", JSON.stringify(panier));
-    // ); /* Supprime item du localStorage */
-    container.remove(); /* Supprime item du DOM */
+    // ); 
+    container.remove(); 
+// on réactualise la page
     location.reload(true);
   });
 };
 
-// incremente et rajoute un produit au panier avec la flèche de droite
+// incremente avec l'icone +
 
 const incrementItem = (iconRight, container, productId) => {
   iconRight.addEventListener("click", () => {
@@ -117,33 +129,42 @@ const incrementItem = (iconRight, container, productId) => {
       delete panier[productId];
     }
     localStorage.setItem("panier", JSON.stringify(panier));
-    // ); /* Supprime item du localStorage */
-    container.remove(); /* Supprime item du DOM */
+    // ); 
+    container.remove(); 
+// on réactualise la page
     location.reload(true);
   });
 };
 
 displayCart();
 
+// partie pour le formulaire et la vérification des éléments saisis
+
 const containNumber = /[0-9]/;
 const regexEmail = /.+@.+\..+/;
 const specialCharacter = /[$&+,:;=?@#|'<>.^*()%!"{}_"]/;
 
-const isNotEmpty = (value) => (value !== "" ? true : false); // Vérifie que la valeur donnée ne soit pas vide
-const isLongEnough = (value) => (value.length >= 2 ? true : false); // Vérifie que la valeur donnée ait assez de caractère
+// on vérifie que la valeur n'est pas vide
+const isNotEmpty = (value) => (value !== "" ? true : false); 
+// on vérifié qu'il y a plus de 2 caractères
+const isLongEnough = (value) => (value.length >= 2 ? true : false); 
+// pas de chiffre pour cette valeur
 const doNotContainNumber = (value) =>
-  !value.match(containNumber) ? true : false; // Vérifie que la valeur donnée ne possède pas de chiffre
+  !value.match(containNumber) ? true : false; 
+// pas de symbole pour cette valeur
 const doNotContainSpecialCharacter = (value) =>
-  !value.match(specialCharacter) ? true : false; // Vérifie que la valeur donnée ne possède pas de symbole
-const isValidEmail = (value) => (value.match(regexEmail) ? true : false); // Vérifie que la valeur donnée soit bien dans le format email
+  !value.match(specialCharacter) ? true : false; 
+// format email pour cette valeur
+const isValidEmail = (value) => (value.match(regexEmail) ? true : false); 
 
+// renvoie true si toutes les conditions sont vérifiées
 const isValidInput = (value) =>
   isNotEmpty(value) &&
   isLongEnough(value) &&
   doNotContainNumber(value) &&
-  doNotContainSpecialCharacter(value); // renvoie true si toutes les conditions sont vérifiées
+  doNotContainSpecialCharacter(value); 
 
-// Récupère les éléments du formulaire
+// On récupère les éléments du formulaire
 const firstName = form.elements.firstName;
 const lastName = form.elements.lastName;
 const address = form.elements.address;
@@ -173,9 +194,9 @@ const formValidate = () => {
 
           if (isValidEmail(email.value)) {
             emailErrorMessage.textContent = "";
-
+			
+ // si valide, on renvoie l'objet contact à cartInformation
             return (cartInformation.contact = {
-              // si valide, on renvoie l'objet contact à cartInformation
               firstName: firstName.value,
               lastName: lastName.value,
               address: address.value,
@@ -208,7 +229,7 @@ const formValidate = () => {
     return false;
   }
 };
-// Envoie données à l'api
+// On envoie les données à l'api
 const postData = async (method, url, dataElt) => {
   const response = await fetch(url, {
     headers: {
@@ -220,25 +241,28 @@ const postData = async (method, url, dataElt) => {
   return await response.json();
 };
 
+// On écoute le clic
 btn.addEventListener("click", async (e) => {
   e.preventDefault();
-  // Validation du formulaire
+// On valide le formulaire
   const validForm = formValidate(); 
   if (validForm !== false) {
-	  // Envoi des données au serveur
+// On envoie les données à l'API
     const response = await postData(
       "POST",
       "http://localhost:3000/api/teddies/order",
       cartInformation
     ); 
-	// Redirige vers la page de confirmation de commande
-    window.location = `./confirmation.html?id=${response.orderId}&price=${totalPrice}&user=${firstName.value}`; // On vide la localStorage
+// On redirige vers la page de confirmation de commande avec les paramètres da
+    window.location = `./confirmation.html?id=${response.orderId}&price=${totalPrice}&user=${firstName.value}`; 
+	
+// On vide le localStorage
     localStorage.removeItem("panier");
   }
 });
 
 if (!localStorage.getItem("panier")) {
-  // vérifie que le localStorage est vide, on cache le formulaire et on insère le texte
+// vérifie que le localStorage est vide, on cache le formulaire et on insère le texte
   cart.textContent = "Votre panier est vide.";
   form.classList.add("invisible");
 }
