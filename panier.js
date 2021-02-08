@@ -77,17 +77,17 @@ async function renderCommande() {
 
 // On collecte les données saisies
 function controle(formulaire) {
-var name = document.formulaire.name.value;
-var prenom = document.formulaire.prenom.value;
-var adresse = document.formulaire.adresse.value;
-var ville = document.formulaire.ville.value;
+var firstName = document.formulaire.name.value;
+var lastName = document.formulaire.prenom.value;
+var address = document.formulaire.adresse.value;
+var city = document.formulaire.ville.value;
 var email = document.formulaire.email.value;
 
 // On sauvegarde les différentes lignes dans le localStorage
-localStorage.setItem("Nom", name);
-localStorage.setItem("Prénom", prenom);
-localStorage.setItem("Adresse", adresse);
-localStorage.setItem("Ville", ville);
+localStorage.setItem("Nom", firstName);
+localStorage.setItem("Prénom", lastName);
+localStorage.setItem("Adresse", address);
+localStorage.setItem("Ville", city);
 localStorage.setItem("Email", email);
 
  // On vérifie que cela s'est correctement déroulé
@@ -97,16 +97,20 @@ console.log("Commande pour " + localStorage.getItem("Nom") + " --> OK");
 
 
 
-var contact = {nom:localStorage.getItem("Nom"), prenom:localStorage.getItem("Prénom"), adresse:localStorage.getItem("Adresse"), ville:localStorage.getItem("Ville"), email:localStorage.getItem("Email")};
-var products = ["5beaabe91c9d440000a57d96"];//{Commande:localStorage.getItem("Référence")};
+var client = {firstName:localStorage.getItem("Nom"), lastName:localStorage.getItem("Prénom"), address:localStorage.getItem("Adresse"), city:localStorage.getItem("Ville"), email:localStorage.getItem("Email")};
+var order = {Commande:localStorage.getItem("Référence")};
 // Vérification des infos du tableau
-console.log(contact); 
-console.log(products); 
+console.log(client); 
+console.log(order); 
 
 // On l'envoie avec fetch sur contact
 
-var orderDatas = JSON.stringify({contact, products});
+
+var orderDatas = JSON.stringify(client, order);
 console.log("Contrôle avant envoi:" + orderDatas);
+
+
+orderDatas = JSON.stringify(orderDatas);
 
 commande = async function (orderDatas) {
         let commande = await fetch("http://localhost:3000/api/teddies/order", {

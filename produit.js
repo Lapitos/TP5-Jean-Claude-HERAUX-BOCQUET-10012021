@@ -64,7 +64,10 @@ var numeroCommande = entierAleatoire(1001, 9999);
 
 //On utilise les propriétés gestionnaires d'évènement avec nos éléments
 b1.onclick = function(){
-
+	
+	//Panier de l'utilisateur
+	let panier = JSON.parse(localStorage.getItem("panier"));
+	console.log("Panier initialisé");
     // mise en place des différentes variables
     var produitCommande = teddy.name;
     var produitReference = teddy._id;
@@ -80,6 +83,7 @@ b1.onclick = function(){
     console.log("Total à payer : " + prixTotal);
 
     // On sauvegarde les différentes lignes dans le localStorage
+	localStorage.setItem("panier", JSON.stringify(panier));
     localStorage.setItem("Numéro de commande", numeroCommande);
     localStorage.setItem("Article", produitCommande);
     localStorage.setItem("Référence", produitReference);

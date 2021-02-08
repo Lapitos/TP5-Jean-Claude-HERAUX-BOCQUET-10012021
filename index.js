@@ -30,7 +30,7 @@ async function renderTeddies() {
     });
 	
 	
-
+// le container pour afficher les éléments HTML dans la page
     let container = document.querySelector('.container');
     container.innerHTML = html;
 }
