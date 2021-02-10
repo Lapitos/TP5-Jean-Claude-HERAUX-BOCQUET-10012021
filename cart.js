@@ -16,8 +16,8 @@ let totalPrice = 0;
 
 // On récupère les produits du panier.
 const displayCart = async () => {
-  const cartItems = JSON.parse(localStorage.getItem("panier"));
-  if (Object.keys(cartItems).length > 0) {
+	const cartItems = JSON.parse(localStorage.getItem("panier"));
+	if (Object.keys(cartItems).length > 0) {
 	  // Pour chaque article du panier
     for (let i = 0; i < Object.keys(cartItems).length; i++) {
       const itemId = Object.keys(cartItems)[i];

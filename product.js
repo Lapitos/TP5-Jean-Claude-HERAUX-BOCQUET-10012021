@@ -1,8 +1,9 @@
-// Constant de l'URL de l'api
+// Constante de l'URL de l'api
 const url = "http://localhost:3000/api/teddies/";
-// Recupere l'ID du produit
+// On récupère l'ID du produit
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+console.log("ID récupéré : " + id);
 
 const article = document.querySelector("article");
 
@@ -13,11 +14,13 @@ const displayProduct = async () => {
   customizeTeddy(article, data.colors);
   addToCart(article, data);
 };
+
 // Récupère une peluche
 const getTeddy = async (productUrl, productId) => {
   const response = await fetch(productUrl + productId);
   return await response.json();
 };
+
 // Constitution des éléments pour l'insertion via innerHTML
 const renderTeddy = (productData) => {
   article.innerHTML = `

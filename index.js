@@ -1,11 +1,13 @@
+
 // Constante pour l'URL de l'api
 const url = "http://localhost:3000/api/teddies";
 
-// On va récupèrer les différents constituant du produit
+// On va récupèrer les différents constituant pour chaque produit
 const displayProducts = async () => {
   const products = await getAllTeddies(url);
   products.forEach((product) => {
     renderProduct(product.name, product._id, product.imageUrl, product.price);
+	console.log(" produits récupérés : " + product.name);
   });
 };
 // Récupère toutes les peluches
