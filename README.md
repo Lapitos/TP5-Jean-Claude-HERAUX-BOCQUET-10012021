@@ -1,6 +1,6 @@
 # Orinoco #
 
-Il s'agit du serveur principal du projet 5 de développeur Web.
+Le serveur se trouve dans le dossier compressé JWDP5. A dézipper dans le même dossier que le site web.
 
 ### Pré-requis ###
 
