@@ -62,11 +62,12 @@ const customizeTeddy = (parentElt, productColors) => {
 };
 	// On ajoute le produit au panier
 	const addToCart = (parentElt, productData) => {
-  // Création d'un bouton d'envoi
+  // Création d'un bouton d'envoi et de la DIV
   const btn = document.createElement("button");
   const div = document.createElement("div");
   btn.textContent = "Ajouter au panier";
   div.classList.add("add-to-cart");
+  // on ajoute au DOM via appendChild
   parentElt.appendChild(div).appendChild(btn);
 
   // Constante Produit pour envoi dans le localStorage
